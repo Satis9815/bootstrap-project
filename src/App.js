@@ -6,6 +6,7 @@ import ResetPassword from './components/Auth/ResetPassword';
 import SignUp from './components/Auth/SignUp';
 import Contact from './components/Contact/Contact';
 import RequestCourse from './components/Contact/RequestCourse';
+import CourseDetails from './components/courses/CourseDetails';
 import Courses from './components/courses/Courses';
 import Home from './components/Home/Home';
 import Footer from './components/Layout/Footer/Footer';
@@ -15,6 +16,9 @@ import PaymentFail from './components/Payments/PaymentFail';
 import PaymentSuccess from './components/Payments/PaymentSuccess';
 import Subscribe from './components/Payments/Subscribe';
 function App() {
+  window.addEventListener("contextmenu",(e)=>{
+    e.preventDefault();
+  })
   return (
   <>
   <Router>
@@ -22,6 +26,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/courses' element={<Courses/>}/>
+      <Route path='/courses/:id' element={<CourseDetails/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/contact' element={<Contact/>}/>
