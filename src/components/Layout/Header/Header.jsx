@@ -4,7 +4,7 @@ import {ColorModeSwitcher} from '../../../ColorModeSwitcher'
 import { Button } from 'react-bootstrap'
 import {Link} from "react-router-dom"
 const Header = () => {
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     const user ={
         role:"admin"
     }

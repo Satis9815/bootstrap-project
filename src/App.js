@@ -15,10 +15,11 @@ import NotFound from './components/Layout/NofFound/NotFound';
 import PaymentFail from './components/Payments/PaymentFail';
 import PaymentSuccess from './components/Payments/PaymentSuccess';
 import Subscribe from './components/Payments/Subscribe';
+import Profile from './components/Profile/Profile';
 function App() {
-  window.addEventListener("contextmenu",(e)=>{
-    e.preventDefault();
-  })
+  // window.addEventListener("contextmenu",(e)=>{
+  //   e.preventDefault();
+  // })
   return (
   <>
   <Router>
@@ -29,6 +30,7 @@ function App() {
       <Route path='/courses/:id' element={<CourseDetails/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<SignUp/>}/>
+      <Route path='/profile' element={<Profile/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/reqcourse' element={<RequestCourse/>}/>
       <Route path='/forgetpassword' element={<ForgetPassword/>}/>
