@@ -1,5 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import AdminCourses from './components/Admin/CreateCourses/AdminCourses';
+import CreateCourses from './components/Admin/CreateCourses/CreateCourses';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import User from './components/Admin/User/User';
 import ForgetPassword from './components/Auth/ForgetPassword';
 import Login from './components/Auth/Login';
 import ResetPassword from './components/Auth/ResetPassword';
@@ -42,10 +46,16 @@ function App() {
       <Route path='/subscribe' element={<Subscribe/>}/>
       <Route path='/paymentfail' element={<PaymentFail/>}/>
       <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
+
+      {/* *********************Admin Routes ********************** */}
+      <Route path='/admin/dashboard' element={<Dashboard/>}/>
+      <Route path='/admin/createcourses' element={<CreateCourses/>}/>
+      <Route path='/admin/courses' element={<AdminCourses/>}/>
+      <Route path='/admin/users' element={<User/>}/>
       <Route path='*' element={<NotFound/>}/>
 
     </Routes>
-    <Footer/>
+    {/* <Footer/> */}
   </Router>
   </>
   );
