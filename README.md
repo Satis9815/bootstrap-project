@@ -1,3 +1,4 @@
+## I have created this repo for my practice so don't take it seriously
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
