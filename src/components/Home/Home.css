@@ -1,0 +1,11 @@
+.heroImg{
+    transition: all;
+    animation: imgAnimation 1s infinite ease-in-out alternate;
+}
+
+@keyframes imgAnimation {
+    to{
+        transform: translateY(-10px);
+    }
+    
+}
