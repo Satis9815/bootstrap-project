@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { RiArrowDownLine, RiArrowUpLine } from 'react-icons/ri'
 import cursor from '../../../assets/images/learning.jpg'
+import { DoughnutChart, LineChart } from './Chart'
 import Sidebar from './Sidebar'
 
 const Dashboard = () => {
@@ -20,6 +21,9 @@ const Dashboard = () => {
 
           <div style={{boxShadow:"-2px 0 10px rgba(107,70,193,0.5)"}} className="my-4 ">
             <div className='p-3'><h1 className='fs-4 fw-semiibold'>Viws Graph </h1></div>
+            <div>
+              <LineChart/>
+            </div>
 
           </div>
 
@@ -72,6 +76,9 @@ const Dashboard = () => {
             <Col md={5}>
               <div>
                 <div><h1 className='text-center fs-4 fw-semibold'>Users</h1></div>
+                <div className=''>
+                  <DoughnutChart/>
+                </div>
               </div>
             </Col>
             
