@@ -21,7 +21,7 @@ const Courses = () => {
         <div>
             {
                 categories.map((item,index)=>(
-                    <Button key={index} className="mx-2  my-1" variant="success" onClick={()=>setCategory(item)}>{item}</Button>
+                    <Button key={index} value={category} className="mx-2  my-1" variant="success" onClick={()=>setCategory(item)}>{item}</Button>
                 ))
             }
         </div>
