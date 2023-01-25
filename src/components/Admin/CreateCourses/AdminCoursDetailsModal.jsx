@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Col, Row } from 'react-bootstrap';
 import { RiDeleteBin7Fill } from 'react-icons/ri'

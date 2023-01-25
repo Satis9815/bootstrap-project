@@ -3,11 +3,7 @@ import {  Container, Nav, Navbar } from 'react-bootstrap'
 import {ColorModeSwitcher} from '../../../ColorModeSwitcher'
 import { Button } from 'react-bootstrap'
 import {Link} from "react-router-dom"
-const Header = () => {
-    const isAuthenticated = true;
-    const user ={
-        role:"admin"
-    }
+const Header = ({isAuthenticated=false,user}) => {
 
     const logoutHandler = () =>{
         console.log("logout")

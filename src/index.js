@@ -4,16 +4,20 @@ import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import {ChakraProvider,theme} from "@chakra-ui/react"
+import {ChakraProvider,theme} from "@chakra-ui/react";
+import {Provider as ReducxProvider} from "react-redux"
+import store from './redux/store';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <ChakraProvider theme={theme} >
+   <ReducxProvider store={store}>
+   <ChakraProvider theme={theme} >
     <App />
     </ChakraProvider>
+   </ReducxProvider>
   </StrictMode>
 );
 
