@@ -39,3 +39,21 @@ export const getMyProfile =()=>async(dishpatch)=>{
     }
     
     }
+
+    export const logout =()=>async(dishpatch)=>{
+        try {
+            dishpatch({type:"logoutRequest"});
+            const {data} = await axios.get(`${server}/logout`,{
+               
+                withCredentials:true
+        
+            });
+            console.log(data);
+            dishpatch({type:"logoutSuccess",payload:data.message});
+            
+        } catch (error) {
+            dishpatch({type:"logoutFail",payload:error.response.data.message});
+            
+        }
+        
+        }

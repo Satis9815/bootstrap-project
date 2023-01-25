@@ -26,6 +26,7 @@ import UpdateProfile from './components/Profile/UpdateProfile';
 
 import {toast,Toaster} from "react-hot-toast"
 import { getMyProfile } from './redux/actions/userAction';
+import {ProtectedRoute} from "protected-route-react" 
 function App() {
   // window.addEventListener("contextmenu",(e)=>{
   //   e.preventDefault();
@@ -60,9 +61,13 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/courses' element={<Courses/>}/>
       <Route path='/courses/:id' element={<CourseDetails/>}/>
-      <Route path='/login' element={<Login/>}/>
+      <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"> 
+        <Login/>
+      </ProtectedRoute>}/>
       <Route path='/signup' element={<SignUp/>}/>
-      <Route path='/profile' element={<Profile/>}/>
+      <Route path='/profile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+        <Profile/>
+      </ProtectedRoute>}/>
       <Route path='/updatepassword' element={<UpdatePassword/>}/>
       <Route path='/changeprofile' element={<UpdateProfile/>}/>
       <Route path='/contact' element={<Contact/>}/>

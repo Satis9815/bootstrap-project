@@ -3,10 +3,14 @@ import {  Container, Nav, Navbar } from 'react-bootstrap'
 import {ColorModeSwitcher} from '../../../ColorModeSwitcher'
 import { Button } from 'react-bootstrap'
 import {Link} from "react-router-dom"
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../redux/actions/userAction'
 const Header = ({isAuthenticated=false,user}) => {
+  const dispatch = useDispatch();
 
     const logoutHandler = () =>{
-        console.log("logout")
+        console.log("logout");
+        dispatch(logout());
     }
   return (
     <section>
