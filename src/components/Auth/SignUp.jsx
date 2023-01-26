@@ -1,7 +1,9 @@
 import { Avatar, Box } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux';
 import {Link} from 'react-router-dom'
+import { signup } from '../../redux/actions/userAction';
 
 const SignUp = () => {
     const [email,setEmail] = useState('');
@@ -9,6 +11,8 @@ const SignUp = () => {
     const [name,setName] = useState('');
     const [imagePrev,setImagePrev] = useState('');
     const [image,setImage] = useState('');
+
+    const dispatch = useDispatch();
 
     const imagePrevHandler=(e)=>{
 
@@ -24,6 +28,19 @@ const SignUp = () => {
 
 
     }
+
+    const submitHndler =(e)=>{
+      e.preventDefault();
+      const myForm = new FormData();
+
+      myForm.append("name",name);
+      myForm.append("email",email);
+      myForm.append("password",password);
+      myForm.append("file",image);
+
+      dispatch(signup(myForm));
+
+    }
   return (
     <div className='d-flex justify-content-center align-items-center flex-column' style={{height:'90vh'}}>
         <h1 className='text-center fs-1 fw-semibold'>Sign Up</h1>
@@ -31,7 +48,7 @@ const SignUp = () => {
             <Avatar src={imagePrev} size="2xl"/>
         </Box>
         
-      <form >
+      <form onSubmit={submitHndler} >
         <div>
         <div className='d-flex flex-column '>
             <label>Name</label>
@@ -52,7 +69,7 @@ const SignUp = () => {
             </label>
             </div>
             <div className='my-3 d-flex  justify-content-between align-items-center'>
-                <Link><Button variant='outline-info'>sign up</Button></Link>
+                <Button variant='outline-info' type='submit'>sign up</Button>
             </div>
             <div>
                 Already signed up ? <Link to="/login"><kbd>Login</kbd> </Link> here

@@ -4,7 +4,7 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ChangePhoto from './ChangePhoto';
 
-const Profile = () => {
+const Profile = ({user}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const removeFromPlaylistHandler = (id)=>{
         console.log("removed");
@@ -15,29 +15,7 @@ const Profile = () => {
         console.log(image);
 
     }
-  const user = {
-    name: 'Satis',
-    email: 'satis@gmail.com',
-    createdAt: String(new Date().toISOString()),
-    role: 'user',
-    subscription: {
-      status: undefined,
-    },
-    playlist: [
-      {
-        courses: 'aslkdmsa',
-        poster: "https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg",
-      },
-      {
-        courses: 'aslkdmsa',
-        poster: "https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg",
-      },
-      {
-        courses: 'aslkdmsa',
-        poster: "https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg",
-      },
-    ],
-  };
+
   return (
     <Container>
       <Row className="" >
@@ -49,7 +27,7 @@ const Profile = () => {
             <div>
               <div>
                 {' '}
-                <Avatar boxSize={'48'} />
+                <Avatar boxSize={'48'} src={user.avatar.url}/>
                 <div className="my-2 ">
                   <Button onClick={onOpen} variant="secondary">Change Photo</Button>
                 </div>
@@ -62,7 +40,7 @@ const Profile = () => {
               {user.role !== 'admin' && (
                 <p>
                   Subscription:
-                  {user.subscription.status === 'active' ? (
+                  { user.subscription && user.subscription.status === 'active' ? (
                     <>
                       <Button variant="secondary">Cancel subscription</Button>
                     </>

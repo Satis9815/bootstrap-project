@@ -27,13 +27,14 @@ import UpdateProfile from './components/Profile/UpdateProfile';
 import {toast,Toaster} from "react-hot-toast"
 import { getMyProfile } from './redux/actions/userAction';
 import {ProtectedRoute} from "protected-route-react" 
+import Loader from './components/Layout/Loader/Loader';
 function App() {
   // window.addEventListener("contextmenu",(e)=>{
   //   e.preventDefault();
   // })
 
   const dispatch = useDispatch();
-  const {isAuthenticated,user,message,error} = useSelector(state=>state.user);
+  const {isAuthenticated,user,message,error,loading} = useSelector(state=>state.user);
   useEffect(()=>{
     if(error){
       toast.error(error);
@@ -56,7 +57,10 @@ function App() {
   return (
   <>
   <Router>
-    <Header isAuthenticated={isAuthenticated} user={user}/>
+  {
+    loading ? (<Loader/>) : (
+      <>
+        <Header isAuthenticated={isAuthenticated} user={user}/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/courses' element={<Courses/>}/>
@@ -64,12 +68,18 @@ function App() {
       <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"> 
         <Login/>
       </ProtectedRoute>}/>
-      <Route path='/signup' element={<SignUp/>}/>
-      <Route path='/profile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
-        <Profile/>
+      <Route path='/signup' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile">
+        <SignUp/>
       </ProtectedRoute>}/>
-      <Route path='/updatepassword' element={<UpdatePassword/>}/>
-      <Route path='/changeprofile' element={<UpdateProfile/>}/>
+      <Route path='/profile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+        <Profile user={user}/>
+      </ProtectedRoute>}/>
+      <Route path='/updatepassword' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+        <UpdatePassword/>
+      </ProtectedRoute>}/>
+      <Route path='/changeprofile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+        <UpdateProfile/>
+      </ProtectedRoute>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/reqcourse' element={<RequestCourse/>}/>
       <Route path='/forgetpassword' element={<ForgetPassword/>}/>
@@ -79,15 +89,26 @@ function App() {
       <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
 
       {/* *********************Admin Routes ********************** */}
-      <Route path='/admin/dashboard' element={<Dashboard/>}/>
-      <Route path='/admin/createcourses' element={<CreateCourses/>}/>
-      <Route path='/admin/courses' element={<AdminCourses/>}/>
-      <Route path='/admin/users' element={<User/>}/>
+      <Route path='/admin/dashboard' element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}>
+        <Dashboard/>
+      </ProtectedRoute>}/>
+      <Route path='/admin/createcourses' element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}>
+        <CreateCourses/>
+      </ProtectedRoute>}/>
+      <Route path='/admin/courses' element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}>
+        <AdminCourses/>
+      </ProtectedRoute>}/>
+      <Route path='/admin/users' element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}>
+        <User/>
+      </ProtectedRoute>}/>
       <Route path='*' element={<NotFound/>}/>
 
     </Routes>
     {/* <Footer/> */}
     <Toaster/>
+      </>
+    )
+  }
   </Router>
   </>
   );

@@ -9,7 +9,7 @@ const Header = ({isAuthenticated=false,user}) => {
   const dispatch = useDispatch();
 
     const logoutHandler = () =>{
-        console.log("logout");
+        // console.log("logout");
         dispatch(logout());
     }
   return (
