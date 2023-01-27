@@ -1,29 +1,24 @@
+import { Button, Container, Heading, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
   return (
-    <Container style={{ height: '90vh' }} className="d-flex justify-content-center align-items-center">
-    <div className='d-flex justify-content-center align-items-center flex-column'>
-    <div>
-        <h2 className="fs-2 fw-semibold">Forget Password</h2>
-      </div>
-      <div className="d-flex flex-column my-3 w-100 ">
-        <input
-          type="email"
-          onChange={e => {
+    <Container minH={"90vh"} py={"16"}>
+      <form action="">
+        <Heading children="Forget Password" textAlign={["center","left"]} textTransform={"uppercase"} my="16"/>
+        <VStack spacing={"8"}>
+          <Input type="email" required onChange={e => {
             setEmail(e.target.value);
-          }}
-          value={email}
-          placeholder="example@gmail.com"
-          className="border rounded p-2"
-        />
-      </div>
-      <div className="d-flex flex-column  w-100 ">
-       <Button type='submit' variant='outline-info'>send reset link</Button>
-      </div>
-    </div>
+          }} value={email} placeholder="example@gmail.com" focusBorderColor='yellow.500'/>
+          <Button colorScheme={'yellow'} type="submit" w={"full"}>
+            Send Reset Link
+          </Button>
+
+        </VStack>
+
+      </form>
+   
     </Container>
   );
 };

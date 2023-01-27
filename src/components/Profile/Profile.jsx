@@ -42,7 +42,7 @@ const Profile = ({user}) => {
     },[dispatch,message,error])
 
   return (
-    <Container minH={"90vh"}>
+    <Container minH={"90vh"} >
       
           <Stack justifyContent={'flex-start'} direction={["column","row"] } 
           padding="8">

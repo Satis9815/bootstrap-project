@@ -21,26 +21,13 @@ const UpdateProfile = ({user}) => {
    navigate('/profile');
   }
 
- 
   return (
     <Container py={"16"} minH={'90vh'}>
- 
           <form onSubmit={submitHndler}>
             <Heading textTransform={"uppercase"} 
             children="Update Profile" my={"16"}
             textAlign={["center","left"]}/>
-            <VStack  spacing={'8'}>
-              {/* <div className="d-flex flex-column w-100 "> */}
-                {/* <label>Name</label> */}
-                {/* <input
-                  type="text"
-                  onChange={e => {
-                    setName(e.target.value);
-                  }}
-                  value={name}
-                  placeholder="Name"
-                  className="border rounded p-2"
-                /> */}
+            <VStack  spacing={'8'}> 
                 <Input 
                  type="text"
                  value={name}
@@ -49,35 +36,17 @@ const UpdateProfile = ({user}) => {
                 }} 
                 placeholder="Name"
                 focusBorderColor='yellow.500'/>
-              {/* </div> */}
-              {/* <div className="d-flex flex-column"> */}
-                {/* <label>Email</label> */}
-                {/* <input
-                  type="email"
-                  onChange={e => {
-                    setEmail(e.target.value);
-                  }}
-                  value={email}
-                  placeholder="Example@gmail.com"
-                  className="border rounded p-2"
-                /> */}
                 <Input 
                 type="email"
                  value={email}
                 onChange={e => {setEmail(e.target.value);}}  
                 placeholder="Example@gmail.com" 
                 focusBorderColor='yellow.500'/>
-              {/* </div> */}
-
-              {/* <div className='my-2'> */}
               <Button isLoading={loading} w={"full"} colorScheme={'yellow'} type="submit">
                   update
                 </Button>
-              {/* </div> */}
             </VStack>
-       
           </form>
-      
     </Container>
   );
 };
