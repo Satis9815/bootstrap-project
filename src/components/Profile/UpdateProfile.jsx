@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Heading, Input, VStack } from '@chakra-ui/react';
+import React, {  useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { updateProfile } from '../../redux/actions/profileAction';
+import { getMyProfile } from '../../redux/actions/userAction';
 
-const UpdateProfile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  return (
-    <Container className='d-flex justify-content-center align-items-center'  style={{ height: '90vh' }}>
+const UpdateProfile = ({user}) => {
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+
+  const dispatch = useDispatch();
+  const {loading} = useSelector(state=>state.profile);
+
+  const navigate = useNavigate();
+
+  const submitHndler =async(e)=>{
+    e.preventDefault();
+   await dispatch(updateProfile(name,email));
+   dispatch(getMyProfile());
+   navigate('/profile');
+  }
+
  
-          <form>
-            <div className='w-100 d-flex justify-content-center align-items-center'>
-            <div className="d-flex flex-column ">
-              <div className="d-flex flex-column w-100 ">
-                <label>Name</label>
-                <input
+  return (
+    <Container py={"16"} minH={'90vh'}>
+ 
+          <form onSubmit={submitHndler}>
+            <Heading textTransform={"uppercase"} 
+            children="Update Profile" my={"16"}
+            textAlign={["center","left"]}/>
+            <VStack  spacing={'8'}>
+              {/* <div className="d-flex flex-column w-100 "> */}
+                {/* <label>Name</label> */}
+                {/* <input
                   type="text"
                   onChange={e => {
                     setName(e.target.value);
@@ -20,28 +40,42 @@ const UpdateProfile = () => {
                   value={name}
                   placeholder="Name"
                   className="border rounded p-2"
-                />
-              </div>
-              <div className="d-flex flex-column">
-                <label>Email</label>
-                <input
-                  type="password"
+                /> */}
+                <Input 
+                 type="text"
+                 value={name}
+                 onChange={e => {
+                  setName(e.target.value);
+                }} 
+                placeholder="Name"
+                focusBorderColor='yellow.500'/>
+              {/* </div> */}
+              {/* <div className="d-flex flex-column"> */}
+                {/* <label>Email</label> */}
+                {/* <input
+                  type="email"
                   onChange={e => {
                     setEmail(e.target.value);
                   }}
                   value={email}
                   placeholder="Example@gmail.com"
                   className="border rounded p-2"
-                />
-              </div>
+                /> */}
+                <Input 
+                type="email"
+                 value={email}
+                onChange={e => {setEmail(e.target.value);}}  
+                placeholder="Example@gmail.com" 
+                focusBorderColor='yellow.500'/>
+              {/* </div> */}
 
-              <div className='my-2'>
-                <Button variant="secondary" className="mx-2" type='submit'>
-                  Update Profile
+              {/* <div className='my-2'> */}
+              <Button isLoading={loading} w={"full"} colorScheme={'yellow'} type="submit">
+                  update
                 </Button>
-              </div>
-            </div>
-            </div>
+              {/* </div> */}
+            </VStack>
+       
           </form>
       
     </Container>

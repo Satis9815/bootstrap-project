@@ -80,4 +80,54 @@ export const userReducer = createReducer({},{
         
     }
 
+});
+
+// Update profile reducer 
+export const profileReducer = createReducer({},{
+    updateProfileRequest:(state)=>{
+        state.loading = true
+    },
+    updateProfileSuccess:(state,action)=>{
+        state.loading = false;
+        state.message = action.payload;
+    },
+    updateProfileFail:(state,action)=>{
+            state.loading = false;
+            state.error = action.payload;
+    },
+
+    changePasswordRquest:(state)=>{
+        state.loading = true
+    },
+    changePasswordSuccess:(state,action)=>{
+        state.loading = false;
+        state.message = action.payload;
+    },
+    changePasswordFail:(state,action)=>{
+            state.loading = false;
+            state.error = action.payload;
+    },
+
+    
+    updateProfiePictureRquest:(state)=>{
+        state.loading = true
+    },
+    updateProfiePictureSuccess:(state,action)=>{
+        state.loading = false;
+        state.message = action.payload;
+    },
+    updateProfiePictureFail:(state,action)=>{
+            state.loading = true;
+            state.error = action.payload;
+    },
+     // Handling error and catch 
+     clearError:(state)=>{
+        state.error = null;
+
+    },
+    clearMessage:(state)=>{
+        state.message = null;
+        
+    }
+
 })

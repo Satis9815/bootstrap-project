@@ -1,7 +1,12 @@
-import { Avatar, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Button, Container, HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { Card, Col, Row } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { updateProfilePicture } from '../../redux/actions/profileAction';
+import { getMyProfile } from '../../redux/actions/userAction';
 import ChangePhoto from './ChangePhoto';
 
 const Profile = ({user}) => {
@@ -10,63 +15,94 @@ const Profile = ({user}) => {
         console.log("removed");
     }
 
-    const chnageImageSubmitHandler =(e,image)=>{
+    const dispatch = useDispatch();
+    const {loading,message,error}= useSelector(state=>state.profile);
+
+    const chnageImageSubmitHandler = async(e,image)=>{
         e.preventDefault();
-        console.log(image);
+        const myForm = new FormData();
+        myForm.append("file",image);
+  
+      await  dispatch(updateProfilePicture(myForm));
+      dispatch(getMyProfile());
 
     }
 
+    useEffect(()=>{
+      if(error){
+        toast.error(error);
+        dispatch({type:"clearError"})
+      }
+  
+      if(message){
+        toast.success(message);
+        dispatch({type:"clearMessage"})
+      }
+  
+    },[dispatch,message,error])
+
   return (
-    <Container>
-      <Row className="" >
-        <Row>
-          <h2 className="fs-2 fw-semibold">Profile</h2>
-        </Row>
-        <Row>
-          <div className="d-flex  ">
-            <div>
-              <div>
+    <Container minH={"90vh"}>
+      
+          <Stack justifyContent={'flex-start'} direction={["column","row"] } 
+          padding="8">
+
+              <VStack>
                 {' '}
                 <Avatar boxSize={'48'} src={user.avatar.url}/>
-                <div className="my-2 ">
-                  <Button onClick={onOpen} variant="secondary">Change Photo</Button>
-                </div>
-              </div>
-            </div>
-            <div className="mx-2">
-              <p>Name:{user.name}</p>
-              <p>Email:{user.email}</p>
-              <p>createdAt:{user.createdAt.split('T')[0]}</p>
+             
+                  {/* <Button onClick={onOpen} variant="secondary">Change Photo</Button> */}
+                  <Button isLoading={loading} colorScheme={'yellow'} variant="ghost" onClick={onOpen} >Change photo</Button>
+               
+              </VStack>
+    
+            <VStack spacing={"4"} alignItems={["center","flex-start"]}>
+              <HStack>
+                <Text children="Name:" fontWeight={'bold'}/>
+                <Text children={user.name}/>
+              </HStack>
+              {/* <p>Name:{user.name}</p> */}
+              {/* <p>Email:{user.email}</p> */}
+              <HStack>
+                <Text children="Email:" fontWeight={'bold'}/>
+                <Text children={user.email}/>
+              </HStack>
+              {/* <p>createdAt:{user.createdAt.split('T')[0]}</p> */}
+              <HStack>
+                <Text children="createdAt:" fontWeight={'bold'}/>
+                <Text children={user.createdAt.split('T')[0]}/>
+              </HStack>
+              
               {user.role !== 'admin' && (
-                <p>
-                  Subscription:
+                <HStack>
+                  <Text children="Subscription" fontWeight={"bold"}/>
                   { user.subscription && user.subscription.status === 'active' ? (
                     <>
-                      <Button variant="secondary">Cancel subscription</Button>
+                      <Button color={'yellow.500'} variant="unstyled">Cancel subscription</Button>
                     </>
                   ) : (
                     <>
                       <Link to="/subscribe">
-                        <Button variant="secondary">subscribe</Button>
+                        {/* <Button variant="secondary">subscribe</Button> */}
+                        <Button colorScheme={'yellow'}>Subscribe</Button>
                       </Link>
                     </>
                   )}{' '}
-                </p>
+                </HStack>
               )}
-              <div className="my-2">
+              <Stack direction={["column","row"]} alignItems={"center"}>
                 <Link to="/changeprofile">
-                  <Button variant="secondary">Change profile</Button>
+                  <Button >Change profile</Button>
                 </Link>
                 <Link to="/updatepassword">
-                  <Button variant="secondary" className="mx-2">
+                  <Button >
                     updatepassword
                   </Button>
                 </Link>
-              </div>
-            </div>
-          </div>
-        </Row>
-        <Row>
+              </Stack>
+            </VStack>
+          </Stack>
+
           <div>
             <h1>Your Playlist </h1>
           </div>
@@ -104,11 +140,10 @@ const Profile = ({user}) => {
               </Row>
             )}
           </div>
-        </Row>
+        
         <Row>
             <ChangePhoto isOpen={isOpen} onClose={onClose} chnageImageSubmitHandler={chnageImageSubmitHandler}/>
         </Row>
-      </Row>
     </Container>
   );
 };

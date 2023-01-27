@@ -78,7 +78,7 @@ function App() {
         <UpdatePassword/>
       </ProtectedRoute>}/>
       <Route path='/changeprofile' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
-        <UpdateProfile/>
+        <UpdateProfile user={user}/>
       </ProtectedRoute>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/reqcourse' element={<RequestCourse/>}/>
