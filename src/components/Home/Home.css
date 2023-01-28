@@ -1,11 +1,24 @@
 .heroImg{
     transition: all;
-    animation: imgAnimation 1s infinite ease-in-out alternate;
+    /* animation: imgAnimation 1s infinite ease-in-out alternate; */
+    filter: drop-shadow(0 40px 10px rgba(0,0,0,0.3));
+    clip-path:polygon(10% 0px, 100% 0%, 100% 100%, 0px 100%);
 }
 
-@keyframes imgAnimation {
+/* @keyframes imgAnimation {
     to{
         transform: translateY(-10px);
     }
     
+} */
+
+.cardStyle{
+    border: none;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s;
 }
+.cardStyle:hover{
+    transform: translateY(-10px);
+    
+}
+

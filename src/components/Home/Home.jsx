@@ -1,35 +1,85 @@
-import { Button } from 'react-bootstrap'
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import heroImg from '../../../src/assets/images/learning.jpg'
-import './Home.css'
+import React, { useEffect, useRef } from 'react';
+import { Col, Container,} from 'react-bootstrap';
+import heroImg from '../../../src/assets/images/home.jpg';
+import './Home.css';
+import { Button, Heading, HStack, Text } from '@chakra-ui/react';
+import CourseCard from '../courses/CourseCard';
+import Typed from "typed.js";
 const Home = () => {
-  return (
-   <section className='py-5' >
-    <Container style={{height:'100%'}}>
-        <Row>
-        <Row >
-            <Col md={7} className="d-flex flex-column justify-content-center align-items-start">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, ut.</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem harum sint voluptas delectus dolorum asperiores obcaecati consequatur dolor hic amet!</p>
-                <div><Button variant="info">Enroll Now</Button></div>
-            </Col>
-            <Col md={5}>
-                <div className='py-4'>
-                <img src={heroImg} alt="pic" className='heroImg' height="300px" width="100%" style={{objectFit:'cover'}}/>
-                </div>
-            </Col>
-        </Row>
-        <Row>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore aliquam delectus molestias molestiae perspiciatis corporis vero maiores. Perspiciatis repudiandae hic expedita porro nostrum! Nihil, sit. Veritatis placeat reiciendis numquam! Commodi consequatur hic officiis delectus, impedit eius saepe nihil aspernatur nostrum, iure esse. Iste sapiente odio ducimus qui hic veritatis repellat ratione fugiat sed autem. Impedit ut labore corrupti dolorum eius? Facilis eos natus eius quia tempore nulla, neque repellendus recusandae exercitationem laboriosam deleniti officia quis optio voluptate possimus voluptatibus? Placeat ducimus architecto repudiandae, ut quia aliquam. Eos ducimus totam fugiat fugit, laudantium beatae, quisquam, officia in nisi sequi et quod facere maxime soluta fuga neque quibusdam dolorum odio. Autem asperiores nobis iste porro similique a cupiditate quam eveniet obcaecati. Alias fugit nulla quod, voluptas fugiat quis repellat, nisi dolorum maxime perferendis in error minus voluptatem quia aspernatur ipsam voluptatum expedita cumque ipsum quo culpa delectus, excepturi accusantium? Esse possimus sed nulla perferendis porro tenetur harum minus quia error aliquid, ratione ut consequuntur nobis quidem nam facilis recusandae, fugiat a deleniti aliquam explicabo laudantium sit. Aliquid nisi iure possimus suscipit quae voluptatem fugiat dolorem reprehenderit officiis non molestiae asperiores, hic vero dolore corporis laudantium labore nam ut eaque. Ullam molestias magnam quam totam. Laborum unde corrupti quidem, architecto culpa impedit tenetur amet dolorum quia a earum maxime, voluptates optio minima quisquam voluptatibus alias quaerat doloribus laboriosam eveniet voluptatem consectetur nam. Commodi.</p>
-        </Row>
-        </Row>
+    const addToPlayListHandler = ()=>{
+        console.log("Clicked")
+    }
+    const el = useRef(null);
+    useEffect(() => {
+      const typed = new Typed(el.current, {
+        strings:[ "DSA","Python","Javascript","Java","Reactjs"], 
+        startDelay: 300,
+        backSpeed:30,
+      backDelay:900,
+      typeSpeed:50,
+      loop:true,
+      });
   
-    </Container>
+      // Destropying
+      return () => {
+        typed.destroy();
+      };
+    }, []);
+  return (
+    <>
+      <div className='d-flex'>
+          <Col
+            md={6}
+            className="d-flex flex-column justify-content-center align-items-start px-md-5 px-3 my-md0 my-5 py-md-0 py-5"
+            // style={{ padding: '0 3rem' }}
+          >
+            <HStack>
+              <Heading children={'Welcome to '} />
+              <Heading
+                color={'yellow.300'}
+                children={'freecourse'}
+                textTransform={'uppercase'}
+              />
+            </HStack>
+            <HStack>
+              <Text fontWeight={"bold"} fontSize={"25"}>Learn</Text>
+              <Text ref={el} fontSize={"25"} color={"yellow.300"}></Text>
+              {/* <span ref={el}></span> */}
+           
+            </HStack>
+            <Text py={"2"} fontSize={"md"} children={"Confused on which course to take? I have got you covered. Browse courses and find out the best course for you. Its free! FreeCourse is my attempt to teach basics and those coding techniques to people in short time which took me ages to learn."}/>
+            
+              <Button my={"2"} colorScheme={"yellow"}>Browse Courses</Button>
+           
+          </Col>
+          <Col md={6} className="mt-5 d-md-block d-none p-0">
+            <div className="py-4">
+              <img
+                src={heroImg}
+                alt="pic"
+                className="heroImg"
+                height="300px"
+                width="100%"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          </Col>
 
+          </div>
 
-   </section>
-  )
-}
+      <Container>
+        <Heading textAlign={"center"} children="Recommended Courses" fontSize={"2xl"}/>
+      <div xs={1} md={2} lg={3} className="my-3 row g-5">
+      <CourseCard title={"sample"} description="sample" imgSrc={"https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg"} id={1} views={23} creator="satis" lectureCount={3} addToPlayListHandler={addToPlayListHandler}/>
 
-export default Home
+     <CourseCard title={"sample"} description="sample" imgSrc={"https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg"} id={1} views={23} creator="satis" lectureCount={3} addToPlayListHandler={addToPlayListHandler}/>
+
+     <CourseCard title={"sample"} description="sample" imgSrc={"https://m.media-amazon.com/images/I/61ZPDQOjw-L._AC_UY327_FMwebp_QL65_.jpg"} id={1} views={23} creator="satis" lectureCount={3} addToPlayListHandler={addToPlayListHandler}/>
+     </div>
+      </Container>
+      
+    </>
+  );
+};
+
+export default Home;

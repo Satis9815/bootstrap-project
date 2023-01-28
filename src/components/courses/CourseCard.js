@@ -1,5 +1,6 @@
+import { Button, HStack, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { Button, Card, Col} from 'react-bootstrap';
+import { Card, Col, } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
 const CourseCard = ({
@@ -12,13 +13,16 @@ const CourseCard = ({
   description,
   lectureCount,
 }) => {
+
+    
   return (
             <Col className='my-md-2 my-3'>
-            <Card className='bg-transparent h-100'>
-            <Card.Body>
+            <Card className='bg-transparent h-100 rounded-0 p-3 cardStyle' >
             <div>
                 <img src={imgSrc} alt="pic" style={{objectFit:'cover',height:'200px',width:'100%'}} />
             </div>
+            <Card.Body className=''>
+           
                 <div>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{description}</Card.Text>
@@ -27,10 +31,10 @@ const CourseCard = ({
                     <Card.Text>Views:{views}</Card.Text>
                 </div>
             </Card.Body>
-            <div  className='ps-2 d-flex justify-content-between' >
-                <Link to={`/courses/${id}`}><Button variant='outline-info'>Watch now</Button></Link>
-                <div><Button variant='outline-info' onClick={()=>{addToPlayListHandler(id)}}>Add to playlist</Button></div>
-            </div>
+            <HStack  justifyContent={"space-between"}>
+            <Link to={`/courses/${id}`}><Button colorScheme={"yellow"}>Watch now</Button></Link>
+                <Button variant={"ghost"} colorScheme={"yellow"} onClick={()=>{addToPlayListHandler(id)}}>Add to playlist</Button>
+            </HStack>
             </Card>
             
             </Col>

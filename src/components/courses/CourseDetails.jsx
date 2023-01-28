@@ -1,5 +1,6 @@
+import { Container, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import introVid from '../../assets/videos/intro.mp4';
 
 const CourseDetails = () => {
@@ -32,6 +33,7 @@ const CourseDetails = () => {
     },
     ]
   return (
+   <>
     <Container>
       <Row>
         <Row>
@@ -60,6 +62,7 @@ const CourseDetails = () => {
         </Row>
       </Row>
     </Container>
+   </>
   );
 };
 
